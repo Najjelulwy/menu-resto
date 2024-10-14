@@ -34,20 +34,18 @@
     <!-- Iframe for the Google Apps Script Web App -->
     <iframe
         id="appsScriptIframe"
-        src="https://script.google.com/macros/s/AKfycbwa8KUrcwiOC5-5IrvseBFfctRfPLUuc1Pf316TLInkA2LebaqE9VYvSi__TjLTUXu2/exec"
+        src=""
         scrolling="no">
     </iframe>
 
     <script>
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
-            const items = urlParams.get("items");
+            const items = urlParams.get("items") || "order";  // Default to 'order' if not specified
 
-            if (items) {
-                // Locate the iframe and send the parameters using postMessage
-                const iframe = document.getElementById("appsScriptIframe");
-                iframe.contentWindow.postMessage({ items: items }, "https://script.google.com");
-            }
+            // Set the iframe src with the parameter directly
+            const iframe = document.getElementById("appsScriptIframe");
+            iframe.src = `https://script.google.com/macros/s/AKfycbwa8KUrcwiOC5-5IrvseBFfctRfPLUuc1Pf316TLInkA2LebaqE9VYvSi__TjLTUXu2/exec?items=${encodeURIComponent(items)}`;
         };
     </script>
 </body>
