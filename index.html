@@ -5,15 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Embed Google Apps Script with Parameters</title>
     <style>
-        iframe {
-            width: 100%;
-            height: 810px;
-            border: none;
-        }
-        body {
-            margin: 0;
-            padding: 0;
-        }
+    /* Prevent scrolling on iframe */
+    #appsScriptIframe {
+        width: 100%;
+        height: 810px;
+        border: none;
+        overflow: hidden; /* This prevents internal scrolling */
+    }
+
+    /* Prevent any scrolling on the body */
+    body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden; /* Prevents scrolling on the page itself */
+    }
         .marquee {
             position: absolute;
             white-space: nowrap;
