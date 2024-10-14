@@ -33,25 +33,24 @@
     <div class="marquee">copy right hafizkid 2024</div>
 
     <!-- Dropdown or Text Input for items parameter -->
-    <div style="padding: 10px; background-color: #f2f2f2;">
-        <label for="itemsInput">Enter items parameter:</label>
-        <input type="text" id="itemsInput" placeholder="e.g., order, menu, etc." />
-        <button onclick="updateIframe()">Load Items</button>
-    </div>
-
-    <!-- Iframe to Google Apps Script Web App -->
-    <iframe id="appsScriptIframe" src="https://script.google.com/macros/s/AKfycbwa8KUrcwiOC5-5IrvseBFfctRfPLUuc1Pf316TLInkA2LebaqE9VYvSi__TjLTUXu2/exec?items=order" scrolling="no"></iframe>
-    
     <script>
-        // Function to update iframe src dynamically
-        function updateIframe() {
-    const items = document.getElementById('itemsInput').value;
-    const iframe = document.getElementById('appsScriptIframe');
-    
-    // Add a cache-busting timestamp to the URL
-    const timestamp = new Date().getTime();
-    iframe.src = `https://script.google.com/macros/s/AKfycbwa8KUrcwiOC5-5IrvseBFfctRfPLUuc1Pf316TLInkA2LebaqE9VYvSi__TjLTUXu2/exec?items=${encodeURIComponent(items)}&t=${timestamp}`;
-}
-    </script>
-</body>
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const items = urlParams.get("items");
+
+        if (items) {
+            const iframe = document.getElementById("appsScriptIframe");  // Assuming iframe has this ID
+            iframe.contentWindow.postMessage({ items: items }, "https://script.google.com");
+        }
+    };
+</script>
+
+<iframe
+    id="appsScriptIframe"
+    src="https://script.google.com/macros/s/AKfycbwa8KUrcwiOC5-5IrvseBFfctRfPLUuc1Pf316TLInkA2LebaqE9VYvSi__TjLTUXu2/exec"
+    width="100%"
+    height="810"
+    scrolling="no">
+</iframe>
+   </body>
 </html>
