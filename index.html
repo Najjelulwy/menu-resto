@@ -39,16 +39,19 @@
         <button onclick="updateIframe()">Load Items</button>
     </div>
 
-   
+    <!-- Iframe to Google Apps Script Web App -->
+    <iframe id="appsScriptIframe" src="https://script.google.com/macros/s/AKfycbwa8KUrcwiOC5-5IrvseBFfctRfPLUuc1Pf316TLInkA2LebaqE9VYvSi__TjLTUXu2/exec?items=order" scrolling="no"></iframe>
+    
     <script>
         // Function to update iframe src dynamically
         function updateIframe() {
-            const items = document.getElementById('itemsInput').value;
-            const iframe = document.getElementById('appsScriptIframe');
-            
-            // Update iframe src with new items parameter
-            iframe.src = `https://script.google.com/macros/s/AKfycbwa8KUrcwiOC5-5IrvseBFfctRfPLUuc1Pf316TLInkA2LebaqE9VYvSi__TjLTUXu2/exec?items=${encodeURIComponent(items)}`;
-        }
+    const items = document.getElementById('itemsInput').value;
+    const iframe = document.getElementById('appsScriptIframe');
+    
+    // Add a cache-busting timestamp to the URL
+    const timestamp = new Date().getTime();
+    iframe.src = `https://script.google.com/macros/s/AKfycbwa8KUrcwiOC5-5IrvseBFfctRfPLUuc1Pf316TLInkA2LebaqE9VYvSi__TjLTUXu2/exec?items=${encodeURIComponent(items)}&t=${timestamp}`;
+}
     </script>
 </body>
 </html>
