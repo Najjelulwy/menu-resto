@@ -44,7 +44,8 @@
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
             const items = urlParams.get("items") || "order";  // Default to 'order' if not specified
-
+            const meja = urlParams.get("meja") || "0";  // Default to '0' if not specified
+            
             // Set the iframe src with the parameter directly
             const iframe = document.getElementById("appsScriptIframe");
             iframe.src = `https://script.google.com/macros/s/AKfycbwa8KUrcwiOC5-5IrvseBFfctRfPLUuc1Pf316TLInkA2LebaqE9VYvSi__TjLTUXu2/exec?items=${encodeURIComponent(selectedItems)}&meja=${encodeURIComponent(meja)}`;
