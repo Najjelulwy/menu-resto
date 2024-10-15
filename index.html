@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Embed Google Apps Script with Parameters</title>
     <style>
-    #appsScriptIframe {
-        width: 100%;
-        height: 810px;
-        border: none;
-        overflow: hidden;
-    }
-    body {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-    }
+        #appsScriptIframe {
+            width: 100%;
+            height: 810px;
+            border: none;
+            overflow: hidden;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
         .marquee {
             position: absolute;
             white-space: nowrap;
@@ -28,28 +28,39 @@
             0% { transform: translateX(-100%); }
             100% { transform: translateX(200%); }
         }
+        /* QR Code style */
+        #qrcode {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 128px;
+            height: 128px;
+        }
     </style>
 </head>
 <body>
     <div class="marquee">copy right hafizkid 2024</div>
 
-    <!-- Iframe for the Google Apps Script Web App -->
-    <iframe
-        id="appsScriptIframe"
-        src=""
-        scrolling="no">
-    </iframe>
+    
 
+    <!-- Iframe for the Google Apps Script Web App -->
+    <iframe id="appsScriptIframe" src="" scrolling="no"></iframe>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script>
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
             const items = urlParams.get("items") || "order";  // Default to 'order' if not specified
-            const meja = urlParams.get("meja") || "0";  // Default to '0' if not specified
+            const meja = urlParams.get("meja") || "default";  // Default value if not specified
             
-            // Set the iframe src with the parameter directly
+            // Generate the iframe URL with parameters
             const iframe = document.getElementById("appsScriptIframe");
-            iframe.src = `https://script.google.com/macros/s/AKfycbwa8KUrcwiOC5-5IrvseBFfctRfPLUuc1Pf316TLInkA2LebaqE9VYvSi__TjLTUXu2/exec?items=${encodeURIComponent(selectedItems)}&meja=${encodeURIComponent(meja)}`;
+            const scriptUrl = "https://script.google.com/macros/s/AKfycbwa8KUrcwiOC5-5IrvseBFfctRfPLUuc1Pf316TLInkA2LebaqE9VYvSi__TjLTUXu2/exec";
+            iframe.src = `${scriptUrl}?items=${encodeURIComponent(items)}&meja=${encodeURIComponent(meja)}`;
+
+     
         };
     </script>
 </body>
 </html>
+
