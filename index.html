@@ -11,17 +11,16 @@
             height: 100%;
             overflow: hidden;
             touch-action: none;
+            position: relative; /* Tambahkan ini untuk positioning */
         }
 
         #appsScriptIframe {
             width: 100%;
             height: 100vh;
             border: none;
+            display: none; /* Sembunyikan iframe hingga data siap */
         }
-       
-           
-           
-        }
+
         .marquee {
             position: absolute;
             white-space: nowrap;
@@ -30,10 +29,12 @@
             font-size: 12px;
             font-family: Arial, sans-serif;
         }
+
         @keyframes marquee {
             0% { transform: translateX(-100%); }
             100% { transform: translateX(200%); }
         }
+
         /* QR Code style */
         #qrcode {
             position: absolute;
@@ -42,12 +43,20 @@
             width: 128px;
             height: 128px;
         }
+
+        /* Style untuk gambar pembuka */
+        #header {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000; /* Pastikan gambar di atas iframe */
+            display: none; /* Sembunyikan gambar saat awal */
+        }
     </style>
 </head>
 <body>
-<!--     <div class="marquee">copy right hafizkid 2024</div>
- -->
- 
+    <img id="header" src="https://docs.google.com/thumbnail?sz=w800&id=1u4iKQAbNPKqmgz3KM-lBAJRLlm3-pQuM" alt="Header GIF">
 
     <!-- Iframe for the Google Apps Script Web App -->
     <iframe id="appsScriptIframe" src="" scrolling="no"></iframe>
@@ -59,13 +68,21 @@
             const items = urlParams.get("items") || "order";  // Default to 'order' if not specified
             const meja = urlParams.get("meja") || "01";  // Default value if not specified
             const user = urlParams.get("user") || "konsumen";  // Default value if not specified
-            
+
+            // Tampilkan gambar pembuka
+            const headerImage = document.getElementById("header");
+            headerImage.style.display = "block";
+
             // Generate the iframe URL with parameters
             const iframe = document.getElementById("appsScriptIframe");
             const scriptUrl = "https://script.google.com/macros/s/AKfycby6bRAgMSpYFUqh52Tws2hcgJ3spKh5LD5F3qMSsaD0gxvqsdvOqFXz-YBXs8i7L1NjRw/exec";
             iframe.src = `${scriptUrl}?items=${encodeURIComponent(items)}&meja=${encodeURIComponent(meja)}&user=${encodeURIComponent(user)}`;
 
-           
+            // Tampilkan iframe setelah dimuat
+            iframe.onload = function() {
+                headerImage.style.display = "none"; // Sembunyikan gambar saat iframe sudah dimuat
+                iframe.style.display = "block"; // Tampilkan iframe
+            };
         };
     </script>
 </body>
