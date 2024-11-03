@@ -5,16 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Embed Google Apps Script with Parameters</title>
     <style>
-        #appsScriptIframe {
-            max-width: 700px;
-            height: 100%;
-            border: none;
-            overflow: hidden;
-        }
-        body {
+        html, body {
             margin: 0;
             padding: 0;
+            height: 100%;
             overflow: hidden;
+            touch-action: none;
+        }
+
+        #appsScriptIframe {
+            width: 100%;
+            height: 100vh;
+            border: none;
         }
         .marquee {
             position: absolute;
