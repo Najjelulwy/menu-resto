@@ -58,7 +58,7 @@
             const urlParams = new URLSearchParams(window.location.search);
             const items = urlParams.get("items") || "order";  // Default to 'order' if not specified
             const meja = urlParams.get("meja") || "01";  // Default value if not specified
-            const meja = urlParams.get("user") || "konsumen";  // Default value if not specified
+            const user = urlParams.get("user") || "konsumen";  // Default value if not specified
             
             // Generate the iframe URL with parameters
             const iframe = document.getElementById("appsScriptIframe");
